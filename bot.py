@@ -211,11 +211,6 @@ def noobdetectionsys(html):
 
 
 async def checkage(authorid, server, client, authorroles, author, altverify, altaccount):
-    #async with aiohttp.get('https://api.roblox.com/users/{}/groups'.format(db[authorid]['userid']), headers=headers) as r:
-        #if r.status == 200:
-           #html = await r.read()
-           #if '3514227'.encode('utf-8') in html or '1200769'.encode('utf-8') in html or '2868472'.encode('utf-8') in html:
-               #await client.send_message(client.get_channel(config[guild.id]['rverifyplus-alerts']), "**DEBUG Alert**: The account '{}' is in a suspicious group. Discord: <@{}>\n<@{}>'s profile: https://www.roblox.com/users/{}/profile".format(db[authorid]['rblxusername'], authorid,authorid,db[authorid]['userid']))
     async with aiohttp.ClientSession(loop=loop) as session:
         if not altverify:
             async with session.get(get_roblox_id.format(db[str(authorid)]['rblxusername']), headers=headers) as r:
@@ -404,18 +399,6 @@ async def checkage(authorid, server, client, authorroles, author, altverify, alt
                                 gameaccessdb[str(db[str(authorid)]['userid'])] = True
                                 with open("gameaccess/{}.json".format(str(server.id)), 'w') as m:
                                     json.dump(gameaccessdb, m, indent=2)
-
-                async with aiohttp.ClientSession(loop=loop) as session:
-                    async with session.get('https://api.roblox.com/users/{}/groups'.format(db[str(authorid)]['userid']), headers=headers) as r:
-                        if r.status == 200:
-                            html = await r.read()
-                            if '3514227'.encode('utf-8') in html or '1200769'.encode('utf-8') in html or '2868472'.encode('utf-8') in html:
-                                print(authorid)
-                                print(True)
-                                if str(server.id) == "419847758170816513":
-                                    getchannel = client.get_channel(config[str(server.id)]['rverifyplus-alerts'])
-                                    await getchannel.send("**DEBUG Alert**: @everyone The account '{}' is in a suspicious group. Discord: <@{}>\n<@{}>'s profile: https://www.roblox.com/users/{}/profile".format(db[str(authorid)]['rblxusername'], authorid,authorid,db[str(authorid)]['userid']))
-                                    await session.close()
 
             elif r.status == 404:
                 try:

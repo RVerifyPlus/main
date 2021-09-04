@@ -37,7 +37,6 @@ import uuid
 import requests
 import platform
 import bcrypt
-import core.newsettingsfunc as newsettingsfunc
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.INFO)

@@ -320,7 +320,7 @@ def access_granted(data, config, db, cache):
         json.dump(cache, h, indent=2)
 
 def deny_notverified_userid(data, config, db):
-    if len(config[data['GuildID']]['game-logs']) > 3:
+    if len(str(config[data['GuildID']]['game-logs'])) > 3:
         headersfordiscord = {
                               "Authorization": "Bot " + config["token"],
                               'User-Agent': 'RVerifyPlus - A ROBLOX User Verification Bot.'
